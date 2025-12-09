@@ -1,0 +1,346 @@
+/* Marzipano Tour Editor Styles */
+
+/* Hide original Marzipano UI elements */
+#titleBar,
+#sceneList,
+#sceneListToggle,
+#autorotateToggle,
+#fullscreenToggle,
+.viewControlButton {
+  display: none !important;
+}
+
+/* Don't adjust pano margin - let it be full width */
+#editor-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: rgba(44, 62, 80, 0.3);
+  color: #ecf0f1;
+  z-index: 10000;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
+}
+
+#editor-sidebar:hover {
+  background: rgba(44, 62, 80, 0.95);
+}
+
+.editor-header {
+  padding: 20px;
+  background: rgba(52, 73, 94, 0.9);
+  border-bottom: 2px solid #1abc9c;
+}
+
+.editor-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #1abc9c;
+}
+
+.scene-list-container {
+  padding: 20px;
+}
+
+.scene-list-container h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: #bdc3c7;
+  text-transform: uppercase;
+}
+
+#scene-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scene-item {
+  background: rgba(52, 73, 94, 0.7);
+  padding: 12px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scene-item:hover {
+  background: rgba(61, 86, 110, 0.9);
+  transform: translateX(5px);
+}
+
+.scene-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.scene-status {
+  font-size: 11px;
+  padding: 3px 8px;
+  background: #7f8c8d;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.scene-status.status-current {
+  background: #27ae60;
+  color: white;
+  font-weight: 600;
+}
+
+.scene-status.status-overlay {
+  background: #e67e22;
+  color: white;
+  font-weight: 600;
+}
+
+.editor-controls {
+  padding: 20px;
+  border-top: 1px solid rgba(52, 73, 94, 0.5);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-small {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #1abc9c;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #16a085;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(26, 188, 156, 0.3);
+}
+
+.btn-secondary {
+  background: #3498db;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.btn-secondary:hover {
+  background: #2980b9;
+}
+
+.btn-small {
+  padding: 6px;
+  font-size: 12px;
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-small:hover {
+  background: #7f8c8d;
+}
+
+/* Center Dot - positioned in viewport center */
+#center-dot {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: #e74c3c;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.9), 0 0 30px rgba(231, 76, 60, 0.5);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.9), 0 0 30px rgba(231, 76, 60, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(231, 76, 60, 1), 0 0 40px rgba(231, 76, 60, 0.7);
+  }
+}
+
+/* Overlay Controls - Draggable */
+#overlay-controls {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  background: rgba(44, 62, 80, 0.3);
+  color: #ecf0f1;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 250px;
+  z-index: 9998;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
+  cursor: move;
+}
+
+#overlay-controls:hover {
+  background: rgba(44, 62, 80, 0.95);
+}
+
+#overlay-controls h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: #1abc9c;
+  cursor: move;
+  user-select: none;
+}
+
+.opacity-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.opacity-controls label {
+  cursor: pointer;
+  padding: 10px;
+  background: rgba(52, 73, 94, 0.6);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.opacity-controls label:hover {
+  background: rgba(61, 86, 110, 0.8);
+}
+
+.opacity-controls input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Control Toggle */
+.control-toggle {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-toggle-label {
+  display: block;
+  font-size: 13px;
+  color: #bdc3c7;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.control-toggle-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.control-toggle-btn {
+  flex: 1;
+  padding: 8px;
+  background: rgba(52, 73, 94, 0.6);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #ecf0f1;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12px;
+  text-align: center;
+}
+
+.control-toggle-btn:hover {
+  background: rgba(61, 86, 110, 0.8);
+}
+
+.control-toggle-btn.active {
+  background: #1abc9c;
+  border-color: #16a085;
+  font-weight: 600;
+}
+
+.overlay-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Transition Settings - Draggable */
+#transition-settings {
+  position: fixed;
+  right: 20px;
+  top: 300px;
+  background: rgba(44, 62, 80, 0.3);
+  color: #ecf0f1;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 250px;
+  z-index: 9997;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease;
+  cursor: move;
+}
+
+#transition-settings:hover {
+  background: rgba(44, 62, 80, 0.95);
+}
+
+#transition-settings h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: #1abc9c;
+  cursor: move;
+  user-select: none;
+}
+
+.setting-group {
+  margin-bottom: 15px;
+}
+
+.setting-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: #bdc3c7;
+}
+
+.setting-group input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  background: rgba(52, 73, 94, 0.6);
+  border: 1px solid rgba(44, 62, 80, 0.5);
+  border-radius: 4px;
+  color: #ecf0f1;
+  font-size: 14px;
+  margin-bottom: 5px;
+  transition: all 0.2s;
+}
+
+.setting-group input[type="number"]:focus {
+  outline: none;
+  border-color: #1abc9c;
+  background: rgba(52, 73, 94, 0.8);
+}
+
+/* Note: Zoom Target and Blur Amount are not yet implemented - placeholders only */
+#zoom-target::placeholder,
+#blur-amount::placeholder {
+  opacity: 0.5;
+}
+
+/* Remove pano margin - let editor be transparent overlay */
+/* #pano should take full width */

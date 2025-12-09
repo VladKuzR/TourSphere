@@ -1,0 +1,64 @@
+<!-- Editor Initialization Script -->
+<script src="app-files/editor.js"></script>
+<script>
+  // Initialize editor after Marzipano loads
+  (function () {
+    console.log("🎬 Editor initialization script loaded");
+
+    // Prevent multiple initializations
+    var editorInitialized = false;
+
+    // Check immediately what's available
+    console.log("📋 Initial check:");
+    console.log("  - APP_DATA exists:", typeof window.APP_DATA !== "undefined");
+    console.log("  - viewer exists:", typeof window.viewer !== "undefined");
+    console.log("  - scenes exists:", typeof window.scenes !== "undefined");
+    console.log(
+      "  - MarzipanoEditor exists:",
+      typeof window.MarzipanoEditor !== "undefined"
+    );
+
+    // Function to check and initialize
+    function tryInitialize() {
+      if (editorInitialized) {
+        console.log("⏭️  Editor already initialized, skipping");
+        return;
+      }
+
+      console.log("🔍 Checking for Marzipano objects...");
+      console.log("  viewer:", window.viewer);
+      console.log("  scenes:", window.scenes);
+      console.log("  APP_DATA:", window.APP_DATA);
+      console.log("  marzipanoReady:", window.marzipanoReady);
+
+      if (window.viewer && window.scenes && window.APP_DATA) {
+        console.log("✅ All objects found! Initializing editor...");
+        try {
+          MarzipanoEditor.init(window.viewer, window.scenes, window.APP_DATA);
+          editorInitialized = true;
+          console.log("🎉 Marzipano Editor initialized successfully!");
+        } catch (error) {
+          console.error("❌ Error initializing editor:", error);
+        }
+      } else {
+        console.warn("⚠️  Missing objects:");
+        if (!window.viewer) console.warn("  - viewer is missing");
+        if (!window.scenes) console.warn("  - scenes is missing");
+        if (!window.APP_DATA) console.warn("  - APP_DATA is missing");
+      }
+    }
+
+    // Try multiple times with different delays
+    console.log("⏱️  Setting up initialization timers...");
+    setTimeout(tryInitialize, 100);
+    setTimeout(tryInitialize, 500);
+    setTimeout(tryInitialize, 1000);
+
+    // Final attempt check
+    setTimeout(function () {
+      if (!editorInitialized) {
+        console.error("💥 Editor failed to initialize after 2 seconds");
+      }
+    }, 2000);
+  })();
+</script>
